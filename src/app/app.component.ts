@@ -14,15 +14,11 @@ export class AppComponent {
   p =  (x) => {
     const oneSecondSource = of(x['x']).pipe(delay(100 * x.x))
     const twoSecondSource = of(x.y).pipe(delay(200 * x.y))
-    return forkJoin(oneSecondSource, twoSecondSource).pipe(map(abs => {const res =abs[0] / abs[1];
-    return { ...x, z: res}
-    }));
-  }
-    stockQuote: number;
-  sub;
-
-
-  ngOnInit() {
+    return forkJoin(oneSecondSource, twoSecondSource).pipe(
+                                                    map(abs => {
+                                                              const res =abs[0] / abs[1];
+                                                              return { ...x, z: res}
+                                                        }));
   }
   constructor() {
     const example1 = this.rootSource$.pipe(concatMap(q => concat(...q.map(this.p))),
