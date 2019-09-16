@@ -1,0 +1,9 @@
+<hello name="{{ name }}"></hello>
+<p>
+  Start editing to see some magic happen :)
+</p>
+<div  *ngFor="let contact of contacts | async" >
+  <div *ngFor="let item of contact | keyvalue">
+      {{item.key}}:{{item.value}}
+    </div>
+</div>
